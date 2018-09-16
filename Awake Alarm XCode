@@ -1,0 +1,79 @@
+//
+//  ViewController.swift
+//  Awake Alarm
+//
+//  Created by Samuel Kwon on 2018-09-15.
+//  Copyright © 2018 Oh Chang Kwon. All rights reserved.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+    
+   
+    @IBOutlet weak var good: UILabel!
+    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var announcement: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getCurrentTime()
+        getCurrentDate()
+        getAnnouncement()
+        getSingle()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+
+    func getAnnouncement() {
+        announcement.text = "Good morning, \nHow was your sleep?"
+    }
+    
+    
+    func getCurrentDate(){
+        let formatter = DateFormatter()
+        //formatter.dateStyle = .long
+        //formatter.timeStyle = .medium
+        formatter.dateFormat = "EEEE, MMMM dd"
+        let str = formatter.string(from: Date())
+        date.text = str
+    }
+    
+    func getCurrentTime(){
+        let formatter = DateFormatter()
+        //formatter.dateStyle = .long
+        //formatter.timeStyle = .medium
+        formatter.dateFormat = "HH:mm"
+        let str = formatter.string(from: Date())
+        time.text = str
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func getSingle(){
+        let date = Date()
+        let calender = Calendar.current
+        let year = calender.component(.year, from: date)
+        let month = calender.component(.month, from: date)
+        let day = calender.component(.day, from: date)
+        
+        print("\(year):\(month):\(day)")
+    }
+
+    @IBAction func good(_ sender: UIButton) {
+        good.text = "That's great! Keep up regulating your sleep cycle and I hope you have a good day!"
+    }
+
+    @IBAction func okay(_ sender: UIButton) {
+        good.text = "That's okay, make sure to get enough hours of sleep!"
+    }
+    
+    @IBAction func bad(_ sender: UIButton) {
+        good.text = "That's not good! Make sure the temperature of your room is at room temperature and get lots of sleep!"
+    }
+ 
+
+}
